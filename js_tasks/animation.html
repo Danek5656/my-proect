@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Анимации</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 200vh;
+        }
+        .header-animation {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        .animated-box {
+            width: 150px;
+            height: 150px;
+            background: #ff6b6b;
+            border-radius: 15px;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .scroll-section {
+            padding: 100px 20px;
+            background: white;
+            margin: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .scroll-animation {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        .scroll-animation.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .progress-bar {
+            height: 5px;
+            width: 0;
+            background: #4ecdc4;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="header-animation">
+        <h1>Демонстрация Анимаций</h1>
+        <div class="animated-box" id="headerBox">Анимация в шапке</div>
+    </div>
+    
+    <div class="scroll-section">
+        <h2>Анимация при прокрутке</h2>
+        <p>Прокрутите страницу вниз, чтобы увидеть анимации</p>
+        
+        <div class="scroll-animation" id="animation1">
+            <div class="animated-box">Элемент 1</div>
+        </div>
+        
+        <div class="scroll-animation" id="animation2">
+            <div class="animated-box">Элемент 2</div>
+        </div>
+        
+        <div class="scroll-animation" id="animation3">
+            <div class="animated-box">Элемент 3</div>
+        </div>
+    </div>
+
+    <script>
+        // Анимация в шапке при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            const headerBox = document.getElementById('headerBox');
+            
+            // Запускаем анимацию после небольшой задержки
+            setTimeout(() => {
+                headerBox.style.transform = 'rotate(360deg) scale(1.2)';
+                headerBox.style.backgroundColor = '#4ecdc4';
+                headerBox.style.transition = 'all 2s ease';
+                
+                // Возвращаем обратно через 2 секунды
+                setTimeout(() => {
+                    headerBox.style.transform = 'rotate(0deg) scale(1)';
+                    headerBox.style.backgroundColor = '#ff6b6b';
+                }, 2000);
+            }, 1000);
+            
+            // Пульсирующая анимация
+            setInterval(() => {
+                headerBox.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    headerBox.style.transform = 'scale(1)';
+                }, 500);
+            }, 3000);
+        });
+
+        // Анимация при прокрутке
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Добавляем случайный цвет для демонстрации
+                    const box = entry.target.querySelector('.animated-box');
+                    const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+                    box.style.backgroundColor = randomColor;
+                }
+            });
+        }, { 
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        });
+
+        // Наблюдаем за всеми элементами с анимацией прокрутки
+        document.querySelectorAll('.scroll-animation').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Прогресс-бар прокрутки
+        window.addEventListener('scroll', function() {
+            const winHeight = window.innerHeight;
+            const docHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.pageYOffset;
+            const scrollPercent = (scrollTop / (docHeight - winHeight)) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+        });
+    </script>
+</body>
+</html>

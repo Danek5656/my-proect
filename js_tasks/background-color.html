@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Смена цвета фона</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            transition: background-color 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        .color-controls {
+            margin: 30px 0;
+        }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        .color-info {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #3498db;
+        }
+        .color-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            gap: 20px;
+        }
+        .color-box {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            border: 3px solid #ddd;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        .color-details {
+            text-align: left;
+        }
+        .color-hex {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .color-name {
+            font-size: 18px;
+            color: #7f8c8d;
+        }
+        .history {
+            margin-top: 30px;
+        }
+        .history-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        .history-color {
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: transform 0.2s ease;
+        }
+        .history-color:hover {
+            transform: scale(1.1);
+        }
+        .history-color.active {
+            border-color: #2c3e50;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Генератор цветов фона</h1>
+        
+        <div class="color-controls">
+            <button onclick="changeBackgroundColor()">Случайный цвет</button>
+            <button onclick="changeToSpecificColor()">Конкретный цвет</button>
+            <button onclick="resetBackground()">Сбросить</button>
+        </div>
+        
+        <div class="color-info">
+            <h3>Текущий цвет фона:</h3>
+            <div class="color-display">
+                <div class="color-box" id="currentColorBox"></div>
+                <div class="color-details">
+                    <div class="color-hex" id="colorHex">#FFFFFF</div>
+                    <div class="color-name" id="colorName">Белый</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="history">
+            <h3>История цветов:</h3>
+            <div class="history-items" id="colorHistory"></div>
+        </div>
+    </div>
+
+    <script>
+        let colorHistory = [];
+        const colorDictionary = {
+            '#ffffff': 'Белый',
+            '#000000': 'Черный',
+            '#ff0000': 'Красный',
+            '#00ff00': 'Зеленый',
+            '#0000ff': 'Синий',
+            '#ffff00': 'Желтый',
+            '#ff00ff': 'Пурпурный',
+            '#00ffff': 'Бирюзовый',
+            '#ffa500': 'Оранжевый',
+            '#800080': 'Фиолетовый',
+            '#a52a2a': 'Коричневый',
+            '#808080': 'Серый',
+            '#ffc0cb': 'Розовый',
+            '#008000': 'Темно-зеленый',
+            '#000080': 'Темно-синий'
+        };
+
+        // Функция для генерации случайного цвета
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        // Функция для получения названия цвета
+        function getColorName(hexColor) {
+            return colorDictionary[hexColor.toLowerCase()] || 'Неизвестный цвет';
+        }
+
+        // Основная функция смены цвета
+        function changeBackgroundColor() {
+            const newColor = getRandomColor();
+            applyNewColor(newColor);
+        }
+
+        // Функция для выбора конкретного цвета
+        function changeToSpecificColor() {
+            const specificColors = [
+                '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57',
+                '#ff9ff3', '#54a0ff', '#5f27cd', '#00d2d3', '#ff9f43'
+            ];
+            const randomColor = specificColors[Math.floor(Math.random() * specificColors.length)];
+            applyNewColor(randomColor);
+        }
+
+        // Функция применения нового цвета
+        function applyNewColor(color) {
+            // Устанавливаем цвет фона
+            document.body.style.backgroundColor = color;
+            
+            // Обновляем информацию о цвете
+            document.getElementById('currentColorBox').style.backgroundColor = color;
+            document.getElementById('colorHex').textContent = color.toUpperCase();
+            document.getElementById('colorName').textContent = getColorName(color);
+            
+            // Добавляем цвет в историю
+            addToHistory(color);
+        }
+
+        // Функция добавления цвета в историю
+        function addToHistory(color) {
+            // Проверяем, нет ли уже этого цвета в истории
+            if (!colorHistory.includes(color)) {
+                colorHistory.unshift(color);
+                
+                // Ограничиваем историю 10 цветами
+                if (colorHistory.length > 10) {
+                    colorHistory.pop();
+                }
+                
+                updateHistoryDisplay();
+            }
+        }
+
+        // Функция обновления отображения истории
+        function updateHistoryDisplay() {
+            const historyContainer = document.getElementById('colorHistory');
+            historyContainer.innerHTML = '';
+            
+            colorHistory.forEach((color, index) => {
+                const colorElement = document.createElement('div');
+                colorElement.className = 'history-color';
+                colorElement.style.backgroundColor = color;
+                colorElement.title = `${color.toUpperCase()} - ${getColorName(color)}`;
+                
+                colorElement.addEventListener('click', function() {
+                    applyNewColor(color);
+                });
+                
+                historyContainer.appendChild(colorElement);
+            });
+        }
+
+        // Функция сброса фона
+        function resetBackground() {
+            applyNewColor('#ffffff');
+        }
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Устанавливаем начальный белый цвет
+            applyNewColor('#ffffff');
+            
+            // Добавляем обработчик клавиатуры
+            document.addEventListener('keydown', function(event) {
+                if (event.code === 'Space') {
+                    event.preventDefault();
+                    changeBackgroundColor();
+                }
+            });
+        });
+
+        // Дополнительная функция для плавного перехода между цветами
+        function smoothColorTransition(targetColor, duration = 1000) {
+            const startColor = document.body.style.backgroundColor || 'rgb(255, 255, 255)';
+            const startTime = performance.now();
+            
+            function updateColor(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Интерполяция цвета
+                const currentColor = interpolateColor(startColor, targetColor, progress);
+                document.body.style.backgroundColor = currentColor;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateColor);
+                } else {
+                    applyNewColor(targetColor);
+                }
+            }
+            
+            requestAnimationFrame(updateColor);
+        }
+
+        // Вспомогательная функция для интерполяции цветов
+        function interpolateColor(color1, color2, factor) {
+            // Простая реализация - в реальном проекте нужно парсить цвета
+            return factor < 0.5 ? color1 : color2;
+        }
+    </script>
+</body>
+</html>

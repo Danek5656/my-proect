@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Егор Ерёмин">
+    <title>Моя вёрстка VLAN</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Навигация -->
+        <nav>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Страницы сайта ▾</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item">
+                            <a href="str1.html" class="dropdown-link">Таблица VLAN</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="str2.html" class="dropdown-link">Статья о VLAN</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="str3.html" class="dropdown-link">Практикум</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Ресурсы</a>
+                </li>
+            </ul>
+        </nav>
+
+        <hr>
+        
+        <h1>Видео о VLAN на YouTube</h1>
+        <ul>
+            <li><a href="https://www.youtube.com/watch?v=tbg1JiTRBSQ" target="_blank">Основы VLAN для начинающих</a></li>
+            <li><a href="https://www.youtube.com/watch?v=AWCagiMb5iw" target="_blank">Настройка VLAN на коммутаторах</a></li>
+            <li><a href="https://www.youtube.com/watch?v=2NjjmwMT4nY" target="_blank">Практическое применение VLAN</a></li>
+        </ul>
+
+        <h1>Страницы сайта</h1>
+        <ol>
+            <li><a href="str1.html">Таблица VLAN</a></li>
+            <li><a href="str2.html">Статья о VLAN</a></li>
+            <li><a href="str3.html">Практикум</a></li>
+        </ol>
+
+        <!-- Форма регистрации -->
+        <div class="registration-form">
+            <div class="form-group">
+                <label class="form-label">Ваше имя</label>
+                <input type="text" class="form-input">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Ваш e-mail</label>
+                <input type="email" class="form-input">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Ваш телефон</label>
+                <input type="tel" class="form-input">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Пароль</label>
+                <input type="password" class="form-input">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Пароль еще раз</label>
+                <input type="password" class="form-input">
+            </div>
+            <button class="register-button">Регистрация</button>
+        </div>
+
+        <img src="vlan-image.png" alt="Схема VLAN сети" width="600" class="content-image">
+    </div>
+</body>
+</html>

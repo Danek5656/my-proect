@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Егор Ерёмин">
+    <title>Таблица VLAN</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Навигация -->
+        <nav>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Страницы сайта ▾</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item">
+                            <a href="str1.html" class="dropdown-link">Таблица VLAN</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="str2.html" class="dropdown-link">Статья о VLAN</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="str3.html" class="dropdown-link">Практикум</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Ресурсы</a>
+                </li>
+            </ul>
+        </nav>
+
+        <h1>Таблица конфигурации VLAN</h1>
+        
+        <table>
+            <tr>
+                <th>VLAN ID</th>
+                <th>Название</th>
+                <th>Назначение</th>
+                <th>Подсеть</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Default</td>
+                <td>Управление</td>
+                <td>192.168.1.0/24</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Sales</td>
+                <td>Отдел продаж</td>
+                <td>192.168.10.0/24</td>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td>IT</td>
+                <td>IT отдел</td>
+                <td>192.168.20.0/24</td>
+            </tr>
+            <tr>
+                <td>30</td>
+                <td>Guests</td>
+                <td>Гостевой доступ</td>
+                <td>192.168.30.0/24</td>
+            </tr>
+        </table>
+
+        <img src="vlan-diagram.png" alt="Схема VLAN сети" width="500">
+        
+        <!-- Кнопка на главную -->
+        <a href="index.html" class="home-button">🏠 На главную страницу</a>
+    </div>
+</body>
+</html>

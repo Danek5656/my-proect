@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<music_library>
+    <albums>
+        <album id="1">
+            <title>Thriller</title>
+            <artist>Michael Jackson</artist>
+            <year>1982</year>
+            <genre>Pop</genre>
+            <tracks>9</tracks>
+            <duration>42:19</duration>
+            <label>Epic</label>
+            <description>Самый продаваемый альбом всех времен. Содержит хиты "Billie Jean", "Beat It" и заглавный трек "Thriller".</description>
+            <cover_color>#8B0000</cover_color>
+        </album>
+        <album id="2">
+            <title>The Dark Side of the Moon</title>
+            <artist>Pink Floyd</artist>
+            <year>1973</year>
+            <genre>Progressive Rock</genre>
+            <tracks>10</tracks>
+            <duration>42:50</duration>
+            <label>Harvest</label>
+            <description>Концептуальный альбом, исследующий темы безумия, жадности и времени. Один из самых продаваемых альбомов в истории.</description>
+            <cover_color>#000080</cover_color>
+        </album>
+        <album id="3">
+            <title>Back in Black</title>
+            <artist>AC/DC</artist>
+            <year>1980</year>
+            <genre>Hard Rock</genre>
+            <tracks>10</tracks>
+            <duration>41:59</duration>
+            <label>Atlantic</label>
+            <description>Второй студийный альбом с вокалистом Брайаном Джонсоном. Посвящен бывшему вокалисту Бон Скотту.</description>
+            <cover_color>#000000</cover_color>
+        </album>
+        <album id="4">
+            <title>The Bodyguard</title>
+            <artist>Whitney Houston</artist>
+            <year>1992</year>
+            <genre>RandB, Pop</genre>
+            <tracks>12</tracks>
+            <duration>57:26</duration>
+            <label>Arista</label>
+            <description>Саундтрек к фильму "Телохранитель". Содержит легендарную версию песни "I Will Always Love You".</description>
+            <cover_color>#2F4F4F</cover_color>
+        </album>
+        <album id="5">
+            <title>Rumours</title>
+            <artist>Fleetwood Mac</artist>
+            <year>1977</year>
+            <genre>Rock</genre>
+            <tracks>11</tracks>
+            <duration>39:02</duration>
+            <label>Warner Bros.</label>
+            <description>Альбом, созданный в период эмоциональных потрясений в группе. Стал одним из самых продаваемых альбомов.</description>
+            <cover_color>#DAA520</cover_color>
+        </album>
+        <album id="6">
+            <title>Nevermind</title>
+            <artist>Nirvana</artist>
+            <year>1991</year>
+            <genre>Grunge</genre>
+            <tracks>13</tracks>
+            <duration>42:38</duration>
+            <label>DGC</label>
+            <description>Альбом, принесший гранж в мейнстрим. Содержит хит "Smells Like Teen Spirit".</description>
+            <cover_color>#1E90FF</cover_color>
+        </album>
+    </albums>
+</music_library>
